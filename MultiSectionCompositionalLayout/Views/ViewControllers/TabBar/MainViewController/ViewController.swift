@@ -1,0 +1,171 @@
+//
+//  ViewController.swift
+//  MultiSectionCompositionalLayout
+//
+//  Created by Emmanuel Okwara on 15.05.22.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    
+    let images = ["1","2","3","4","5"]
+    let labels = ["Phones", "Computer", "Health","Books","Tools"]
+    
+    var bestSeller = [HomeStoreItem]()
+    var models = [ListItem]()
+    
+    private let sections = MockData.shared.pageData
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        collectionView.collectionViewLayout = createLayout()
+            
+    }
+    
+    func fetchNews() {
+        
+        APICaller.shared.getPhones { result in
+            
+            switch result {
+            case .success(let home_store):
+                self.bestSeller = home_store
+                self.models = home_store.compactMap({ListItem(
+                    title: $0.title,
+                    subtitle: $0.subtitle,
+                    image: $0.picture!,
+                    urlToImage: URL(string: $0.picture ?? ""))
+                })
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+   
+    private func createLayout() -> UICollectionViewCompositionalLayout {
+        UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
+            guard let self = self else { return nil }
+            let section = self.sections[sectionIndex]
+            
+            switch section {
+            case .category:
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .absolute(90), heightDimension: .absolute(100)), subitems: [item])
+                let section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .continuous
+                section.interGroupSpacing = 10
+                section.contentInsets = .init(top: 10, leading: 10, bottom: 0, trailing: 10)
+                section.boundarySupplementaryItems = [self.supplementaryHeaderItem()]
+                section.supplementariesFollowContentInsets = false
+                return section
+                
+            case .hotSales:
+                
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.9)))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.3)), subitems: [item])
+                let section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .groupPagingCentered
+                section.interGroupSpacing = 25
+                section.contentInsets = .init(top: 10, leading: 10, bottom: 0, trailing: 10)
+               
+                section.boundarySupplementaryItems = [self.supplementaryHeaderItem()]
+                section.supplementariesFollowContentInsets = false
+                
+                return section
+                
+            case .bestSeller:
+                
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.5)))
+                item.contentInsets = .init(top: 10, leading: 10, bottom: 0, trailing: 10)
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(0.6)), subitems: [item])
+                let section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .groupPaging
+                
+                section.interGroupSpacing = -5
+                
+                section.contentInsets = .init(top: 10, leading: 0, bottom: 0, trailing: 0)
+                section.boundarySupplementaryItems = [self.supplementaryHeaderItem()]
+                section.supplementariesFollowContentInsets = false
+                return section
+            }
+        }
+    }
+    
+    private func supplementaryHeaderItem() -> NSCollectionLayoutBoundarySupplementaryItem {
+        .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+    }
+}
+//MARK: - CollectionView Delegate & DataSource Methods
+
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return sections.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return sections[section].count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        switch sections[indexPath.section] {
+        case .category:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoryCollectionViewCell", for: indexPath) as! StoryCollectionViewCell
+            cell.setup(with: images[indexPath.row], title: labels[indexPath.row])
+            return cell
+            
+        case .hotSales(let items):
+            
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PortraitCollectionViewCell", for: indexPath) as! PortraitCollectionViewCell
+                cell.setup(items[indexPath.row])
+            cell.layer.masksToBounds = true
+            cell.layer.cornerRadius = cell.frame.height / 8
+
+            return cell
+            
+        case .bestSeller(let items):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LandscapeCollectionViewCell", for: indexPath) as! LandscapeCollectionViewCell
+            cell.setup(items[indexPath.row], "$1047", "$1500", "Xiaomi Mi 10 Pro")
+            
+            return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        switch sections[indexPath.section]{
+        case .category:
+            print(sections[indexPath.section].title)
+            
+            
+        case .hotSales:
+            print(sections[indexPath.section].title)
+            
+        case .bestSeller:
+            print(sections[indexPath.section].title)
+        }
+    }
+    
+    //MARK - Setting up the header for each section
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CollectionViewHeaderReusableView", for: indexPath) as! CollectionViewHeaderReusableView
+            header.setup(title: sections[indexPath.section].title, secondTitle: sections[indexPath.section].title2)
+            
+            return header
+        default:
+            return UICollectionReusableView()
+        }
+    }
+}
