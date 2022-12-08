@@ -14,7 +14,7 @@ final class PortraitCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var itemSubtitle: UILabel!
     @IBOutlet weak var buyButton: UIButton!
     
-    func setup(_ item: ListItem) {
+    func setup(item: ListItem) {
         
         itemName.text = item.title
         itemSubtitle.text = item.subtitle
