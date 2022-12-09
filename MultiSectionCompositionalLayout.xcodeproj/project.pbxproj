@@ -22,6 +22,10 @@
 		E580B3FA283984C5002A77CA /* CollectionViewHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E580B3F9283984C5002A77CA /* CollectionViewHeaderReusableView.swift */; };
 		E580B3FC28398791002A77CA /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E580B3FB28398791002A77CA /* MockData.swift */; };
 		ED1D1CD9294166F5000093EE /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D1CD8294166F5000093EE /* CustomTabBarController.swift */; };
+		ED1D1D0529425643000093EE /* getImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D1D0429425643000093EE /* getImage.swift */; };
+		ED1D1D0929428498000093EE /* SheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D1D0729428498000093EE /* SheetViewController.swift */; };
+		ED1D1D0A29428498000093EE /* SheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED1D1D0829428498000093EE /* SheetViewController.xib */; };
+		ED1D1D0C29428554000093EE /* PresentingSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D1D0B29428554000093EE /* PresentingSheetViewController.swift */; };
 		ED74E71C293FF192003FF35A /* APIcaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74E71B293FF192003FF35A /* APIcaller.swift */; };
 		ED74E728293FF373003FF35A /* APIresponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74E727293FF373003FF35A /* APIresponse.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +50,10 @@
 		E580B3F9283984C5002A77CA /* CollectionViewHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeaderReusableView.swift; sourceTree = "<group>"; };
 		E580B3FB28398791002A77CA /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		ED1D1CD8294166F5000093EE /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		ED1D1D0429425643000093EE /* getImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getImage.swift; sourceTree = "<group>"; };
+		ED1D1D0729428498000093EE /* SheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewController.swift; sourceTree = "<group>"; };
+		ED1D1D0829428498000093EE /* SheetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SheetViewController.xib; sourceTree = "<group>"; };
+		ED1D1D0B29428554000093EE /* PresentingSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentingSheetViewController.swift; sourceTree = "<group>"; };
 		ED74E71B293FF192003FF35A /* APIcaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIcaller.swift; sourceTree = "<group>"; };
 		ED74E727293FF373003FF35A /* APIresponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIresponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,10 +149,21 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		ED1D1D06294281C2000093EE /* Filter View */ = {
+			isa = PBXGroup;
+			children = (
+				ED1D1D0729428498000093EE /* SheetViewController.swift */,
+				ED1D1D0829428498000093EE /* SheetViewController.xib */,
+				ED1D1D0B29428554000093EE /* PresentingSheetViewController.swift */,
+			);
+			path = "Filter View";
+			sourceTree = "<group>";
+		};
 		ED74E71D293FF1B7003FF35A /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				ED74E71B293FF192003FF35A /* APIcaller.swift */,
+				ED1D1D0429425643000093EE /* getImage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -196,6 +215,7 @@
 		ED74E723293FF26D003FF35A /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
+				ED1D1D06294281C2000093EE /* Filter View */,
 				ED74E724293FF2B7003FF35A /* ProductDetails */,
 				E52E5EB028313E6200ACAAA3 /* CollectionViewCells */,
 				E52E5E9C283121C000ACAAA3 /* ViewController.swift */,
@@ -293,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED1D1D0A29428498000093EE /* SheetViewController.xib in Resources */,
 				E52E5EA5283121CA00ACAAA3 /* LaunchScreen.storyboard in Resources */,
 				E52E5EA2283121CA00ACAAA3 /* Assets.xcassets in Resources */,
 				E52E5EA0283121C000ACAAA3 /* Main.storyboard in Resources */,
@@ -350,15 +371,18 @@
 			files = (
 				E52E5EAD2831359C00ACAAA3 /* ListItem.swift in Sources */,
 				E52E5E9D283121C000ACAAA3 /* ViewController.swift in Sources */,
+				ED1D1D0529425643000093EE /* getImage.swift in Sources */,
 				E52E5EB628313F1200ACAAA3 /* LandscapeCollectionViewCell.swift in Sources */,
 				E52E5E99283121C000ACAAA3 /* AppDelegate.swift in Sources */,
 				E52E5E9B283121C000ACAAA3 /* SceneDelegate.swift in Sources */,
+				ED1D1D0929428498000093EE /* SheetViewController.swift in Sources */,
 				E580B3FA283984C5002A77CA /* CollectionViewHeaderReusableView.swift in Sources */,
 				E52E5EB428313E9D00ACAAA3 /* PortraitCollectionViewCell.swift in Sources */,
 				E52E5EB228313E7D00ACAAA3 /* StoryCollectionViewCell.swift in Sources */,
 				ED74E71C293FF192003FF35A /* APIcaller.swift in Sources */,
 				ED74E728293FF373003FF35A /* APIresponse.swift in Sources */,
 				ED1D1CD9294166F5000093EE /* CustomTabBarController.swift in Sources */,
+				ED1D1D0C29428554000093EE /* PresentingSheetViewController.swift in Sources */,
 				E52E5EAF283136BE00ACAAA3 /* ListSection.swift in Sources */,
 				E580B3FC28398791002A77CA /* MockData.swift in Sources */,
 			);
@@ -510,7 +534,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = RT459C64W3;
+				DEVELOPMENT_TEAM = 733XWR5Y23;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MultiSectionCompositionalLayout/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -538,7 +562,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = RT459C64W3;
+				DEVELOPMENT_TEAM = 733XWR5Y23;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MultiSectionCompositionalLayout/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

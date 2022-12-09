@@ -11,7 +11,6 @@ struct ListItem {
     
     let title: String
     let subtitle: String
-    let image: String
     let urlToImage: URL?
     let imageData: Data? = nil
 }

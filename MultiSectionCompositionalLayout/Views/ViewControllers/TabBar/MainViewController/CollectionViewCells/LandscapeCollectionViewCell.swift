@@ -18,15 +18,20 @@ final class LandscapeCollectionViewCell: UICollectionViewCell {
     
     
     
-    func setup(_ item: ListItem, _ price: String, _ discount: String, _ itemModel: String) {
-        cellImageView.image = UIImage(named: item.image)
-        mainPrice.text = price
-        discountPrice.text = discount
-        itemName.text = itemModel
+    func setup(item: BestSellerItem) {
+        mainPrice.text = "$\(item.price_without_discount)"
+        discountPrice.text = String(item.discount_price)
+        itemName.text = item.title
+        
+        if let imageData = item.picture{
+            let url =  URL(string: imageData)
+            cellImageView.load(url: url!)
+
+        }
         
         //Setting linestrike for the label text
         
-        let attributeString = NSMutableAttributedString(string: discount)
+        let attributeString = NSMutableAttributedString(string: "$\(item.discount_price)")
         attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 1, range: NSRange(location: 0, length: attributeString.length))
         
         //setting letter spacing

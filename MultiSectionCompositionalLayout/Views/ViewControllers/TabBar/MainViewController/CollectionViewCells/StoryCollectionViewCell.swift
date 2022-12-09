@@ -15,9 +15,7 @@ final class StoryCollectionViewCell: UICollectionViewCell {
     func setup(with image: String, title: String) {
         cellImageView.image = UIImage(named: image)
         phoneTitle.text = title
-        cellImageView.layoutIfNeeded()
         cellImageView.layer.cornerRadius = cellImageView.frame.height / 2
         cellImageView.layer.masksToBounds = false
-        
     }
 }

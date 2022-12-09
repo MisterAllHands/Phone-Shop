@@ -15,7 +15,7 @@ struct APICaller {
   
     //MARK - Requesting data
     
-    func getPhones( completion: @escaping (Result<[HomeStoreItem], Error>) -> Void) {
+    func getPhones( completion: @escaping (Result<APIresponse, Error>) -> Void) {
         
         if let url = URL(string: "\(baseUrl)") {
             
@@ -30,7 +30,7 @@ struct APICaller {
                     do{
                         let decodedData = try JSONDecoder().decode(APIresponse.self, from: safeData)
                         print(decodedData)
-                        completion(.success(decodedData.home_store))
+                        completion(.success(decodedData))
                         
                     }catch{
                         completion(.failure(error))

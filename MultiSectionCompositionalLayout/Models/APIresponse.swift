@@ -16,12 +16,12 @@ struct APIresponse: Codable{
 
 struct HomeStoreItem: Codable{
     
-//    let id: Int?
-//    let is_new: Bool?
+    let id: Int?
+    let is_new: Bool?
     let title: String
     let subtitle: String
     let picture: String?
-//    let is_buy: Bool?
+    let is_buy: Bool?
  
     
 }
@@ -33,6 +33,6 @@ struct BestSellerItem: Codable{
     let title: String
     let price_without_discount: Int
     let discount_price: Int
-    let pictures: String
+    let picture: String?
 
 }

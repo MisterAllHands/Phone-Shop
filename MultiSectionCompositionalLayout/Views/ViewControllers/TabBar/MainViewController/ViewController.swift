@@ -10,13 +10,14 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     
     let images = ["1","2","3","4","5"]
     let labels = ["Phones", "Computer", "Health","Books","Tools"]
     
-    var bestSeller = [HomeStoreItem]()
     var models = [ListItem]()
+    
+    var apiResponse: APIresponse?
     
     private let sections = MockData.shared.pageData
     
@@ -24,23 +25,24 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.collectionViewLayout = createLayout()
-            
+        
+        fetchNews()
+        
     }
     
     func fetchNews() {
-        
+
         APICaller.shared.getPhones { result in
-            
+
             switch result {
             case .success(let home_store):
-                self.bestSeller = home_store
-                self.models = home_store.compactMap({ListItem(
+                self.apiResponse = home_store
+                self.models = home_store.home_store.compactMap({ListItem(
                     title: $0.title,
                     subtitle: $0.subtitle,
-                    image: $0.picture!,
                     urlToImage: URL(string: $0.picture ?? ""))
                 })
-                
+
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -49,7 +51,15 @@ class ViewController: UIViewController {
             }
         }
     }
-   
+    
+    
+    @IBAction func filterButtonPressed(_ sender: UIBarButtonItem) {
+        
+        presentBottomSheet()
+        
+    }
+    
+
     private func createLayout() -> UICollectionViewCompositionalLayout {
         UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
             guard let self = self else { return nil }
@@ -57,12 +67,12 @@ class ViewController: UIViewController {
             
             switch section {
             case .category:
-                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(1.2)))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .absolute(90), heightDimension: .absolute(100)), subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
-                section.orthogonalScrollingBehavior = .continuous
+                section.orthogonalScrollingBehavior = .paging
                 section.interGroupSpacing = 10
-                section.contentInsets = .init(top: 10, leading: 10, bottom: 0, trailing: 10)
+                section.contentInsets = .init(top: 10, leading: 10, bottom: 30, trailing: 10)
                 section.boundarySupplementaryItems = [self.supplementaryHeaderItem()]
                 section.supplementariesFollowContentInsets = false
                 return section
@@ -118,23 +128,31 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch sections[indexPath.section] {
+            
         case .category:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoryCollectionViewCell", for: indexPath) as! StoryCollectionViewCell
             cell.setup(with: images[indexPath.row], title: labels[indexPath.row])
+           
             return cell
             
-        case .hotSales(let items):
+        case .hotSales:
             
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PortraitCollectionViewCell", for: indexPath) as! PortraitCollectionViewCell
-                cell.setup(items[indexPath.row])
+            
+            DispatchQueue.main.asyncAfter(deadline: .now()+2){
+                cell.setup(item: (self.apiResponse?.home_store[indexPath.row])!)
+            }
+            
             cell.layer.masksToBounds = true
             cell.layer.cornerRadius = cell.frame.height / 8
 
             return cell
             
-        case .bestSeller(let items):
+        case .bestSeller:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LandscapeCollectionViewCell", for: indexPath) as! LandscapeCollectionViewCell
-            cell.setup(items[indexPath.row], "$1047", "$1500", "Xiaomi Mi 10 Pro")
+            DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                cell.setup(item: (self.apiResponse?.best_seller[indexPath.row])!)
+            }
             
             return cell
         }
@@ -167,5 +185,19 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         default:
             return UICollectionReusableView()
         }
+    }
+}
+
+extension ViewController: UIViewControllerTransitioningDelegate{
+    
+    func presentBottomSheet(){
+        let bottomSheet = SheetViewController()
+        bottomSheet.modalPresentationStyle = .custom
+        bottomSheet.transitioningDelegate = self
+        self.present(bottomSheet, animated: true)
+    }
+    
+    func presentationController(forPresented presented: UIViewController, presenting: ViewController?, source: SheetViewController) -> UIPresentationController? {
+        presentationController(forPresented: presented, presenting: presenting, source: source)
     }
 }
