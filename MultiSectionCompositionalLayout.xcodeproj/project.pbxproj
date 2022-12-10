@@ -25,9 +25,9 @@
 		ED1D1D0529425643000093EE /* getImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D1D0429425643000093EE /* getImage.swift */; };
 		ED1D1D0929428498000093EE /* SheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D1D0729428498000093EE /* SheetViewController.swift */; };
 		ED1D1D0A29428498000093EE /* SheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED1D1D0829428498000093EE /* SheetViewController.xib */; };
-		ED1D1D0C29428554000093EE /* PresentingSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D1D0B29428554000093EE /* PresentingSheetViewController.swift */; };
 		ED74E71C293FF192003FF35A /* APIcaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74E71B293FF192003FF35A /* APIcaller.swift */; };
 		ED74E728293FF373003FF35A /* APIresponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74E727293FF373003FF35A /* APIresponse.swift */; };
+		ED9D906F294407F200FF04B0 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D906E294407F200FF04B0 /* ProductViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,9 +53,9 @@
 		ED1D1D0429425643000093EE /* getImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getImage.swift; sourceTree = "<group>"; };
 		ED1D1D0729428498000093EE /* SheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewController.swift; sourceTree = "<group>"; };
 		ED1D1D0829428498000093EE /* SheetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SheetViewController.xib; sourceTree = "<group>"; };
-		ED1D1D0B29428554000093EE /* PresentingSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentingSheetViewController.swift; sourceTree = "<group>"; };
 		ED74E71B293FF192003FF35A /* APIcaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIcaller.swift; sourceTree = "<group>"; };
 		ED74E727293FF373003FF35A /* APIresponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIresponse.swift; sourceTree = "<group>"; };
+		ED9D906E294407F200FF04B0 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,7 +154,6 @@
 			children = (
 				ED1D1D0729428498000093EE /* SheetViewController.swift */,
 				ED1D1D0829428498000093EE /* SheetViewController.xib */,
-				ED1D1D0B29428554000093EE /* PresentingSheetViewController.swift */,
 			);
 			path = "Filter View";
 			sourceTree = "<group>";
@@ -226,6 +225,7 @@
 		ED74E724293FF2B7003FF35A /* ProductDetails */ = {
 			isa = PBXGroup;
 			children = (
+				ED9D906E294407F200FF04B0 /* ProductViewController.swift */,
 			);
 			path = ProductDetails;
 			sourceTree = "<group>";
@@ -372,6 +372,7 @@
 				E52E5EAD2831359C00ACAAA3 /* ListItem.swift in Sources */,
 				E52E5E9D283121C000ACAAA3 /* ViewController.swift in Sources */,
 				ED1D1D0529425643000093EE /* getImage.swift in Sources */,
+				ED9D906F294407F200FF04B0 /* ProductViewController.swift in Sources */,
 				E52E5EB628313F1200ACAAA3 /* LandscapeCollectionViewCell.swift in Sources */,
 				E52E5E99283121C000ACAAA3 /* AppDelegate.swift in Sources */,
 				E52E5E9B283121C000ACAAA3 /* SceneDelegate.swift in Sources */,
@@ -382,7 +383,6 @@
 				ED74E71C293FF192003FF35A /* APIcaller.swift in Sources */,
 				ED74E728293FF373003FF35A /* APIresponse.swift in Sources */,
 				ED1D1CD9294166F5000093EE /* CustomTabBarController.swift in Sources */,
-				ED1D1D0C29428554000093EE /* PresentingSheetViewController.swift in Sources */,
 				E52E5EAF283136BE00ACAAA3 /* ListSection.swift in Sources */,
 				E580B3FC28398791002A77CA /* MockData.swift in Sources */,
 			);

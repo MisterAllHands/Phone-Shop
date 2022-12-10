@@ -2,14 +2,17 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
+  - DropDown (2.3.13)
   - Gemini (1.4.0)
 
 DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/wowansm/Chameleon.git`, branch `swift5`)
+  - DropDown
   - Gemini
 
 SPEC REPOS:
   trunk:
+    - DropDown
     - Gemini
 
 EXTERNAL SOURCES:
@@ -24,8 +27,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   Gemini: 4ad915cca8805577fe3021e02feeca2b77dcdbfc
 
-PODFILE CHECKSUM: cc37efe9ae213969c42ecf599dcd67bfa9154b63
+PODFILE CHECKSUM: b4595eebcddbf53c66f3b2bb710815680bd71438
 
 COCOAPODS: 1.11.3

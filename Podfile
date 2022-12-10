@@ -8,4 +8,5 @@ target 'MultiSectionCompositionalLayout' do
   # Pods for MultiSectionCompositionalLayout
 pod 'Gemini'
 pod 'ChameleonFramework/Swift', :git => 'https://github.com/wowansm/Chameleon.git', :branch => 'swift5'
+pod "DropDown"
 end

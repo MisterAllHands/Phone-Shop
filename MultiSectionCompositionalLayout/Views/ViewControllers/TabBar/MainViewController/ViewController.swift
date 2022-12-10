@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     let images = ["1","2","3","4","5"]
     let labels = ["Phones", "Computer", "Health","Books","Tools"]
     
+
+    
     var models = [ListItem]()
     
     var apiResponse: APIresponse?
@@ -25,11 +27,20 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.collectionViewLayout = createLayout()
-        
         fetchNews()
+        setBarButtonItem()
+    }
+    
+    
+    
+    func setBarButtonItem() {
+       
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
     }
     
+                                             
+                                                        
     func fetchNews() {
 
         APICaller.shared.getPhones { result in
@@ -58,7 +69,6 @@ class ViewController: UIViewController {
         presentBottomSheet()
         
     }
-    
 
     private func createLayout() -> UICollectionViewCompositionalLayout {
         UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
@@ -139,7 +149,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PortraitCollectionViewCell", for: indexPath) as! PortraitCollectionViewCell
             
-            DispatchQueue.main.asyncAfter(deadline: .now()+2){
+            DispatchQueue.main.asyncAfter(deadline: .now()+60){
                 cell.setup(item: (self.apiResponse?.home_store[indexPath.row])!)
             }
             
@@ -150,7 +160,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             
         case .bestSeller:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LandscapeCollectionViewCell", for: indexPath) as! LandscapeCollectionViewCell
-            DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+            DispatchQueue.main.asyncAfter(deadline: .now()+60) {
                 cell.setup(item: (self.apiResponse?.best_seller[indexPath.row])!)
             }
             
@@ -163,14 +173,16 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         switch sections[indexPath.section]{
         case .category:
             print(sections[indexPath.section].title)
-            
-            
         case .hotSales:
             print(sections[indexPath.section].title)
-            
         case .bestSeller:
-            print(sections[indexPath.section].title)
+            self.performSegue(withIdentifier: "goToProductDetails", sender: self)
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destionatio = segue.destination as! ProductViewController
+        
     }
     
     //MARK - Setting up the header for each section
@@ -192,12 +204,9 @@ extension ViewController: UIViewControllerTransitioningDelegate{
     
     func presentBottomSheet(){
         let bottomSheet = SheetViewController()
-        bottomSheet.modalPresentationStyle = .custom
-        bottomSheet.transitioningDelegate = self
+        bottomSheet.modalPresentationStyle = .pageSheet
+        bottomSheet.sheetPresentationController?.detents = [.medium(), .large()]
+        bottomSheet.sheetPresentationController?.preferredCornerRadius = 35
         self.present(bottomSheet, animated: true)
-    }
-    
-    func presentationController(forPresented presented: UIViewController, presenting: ViewController?, source: SheetViewController) -> UIPresentationController? {
-        presentationController(forPresented: presented, presenting: presenting, source: source)
     }
 }
