@@ -19,7 +19,8 @@ class ProductViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.delegate = self
-        collectionView.collectionViewLayout = createLayout()
+//        collectionView.collectionViewLayout = createLayout()
+        fetchProductDetails()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,36 +74,36 @@ class ProductViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 }
 
+//MARK: - CollectionView Delegate & DataSource Methods
+
+
 extension ProductViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+
+        private func createLayout() -> UICollectionViewCompositionalLayout {
+            UICollectionViewCompositionalLayout { _,_  in
+                    
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)), subitems: [item])
+                let section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .groupPagingCentered
+                section.interGroupSpacing = 10
+                section.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
     
-    private func createLayout() -> UICollectionViewCompositionalLayout {
-        UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
-            guard let self = self else { return}
-            
-            
-            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.9)))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.3)), subitems: [item])
-            let section = NSCollectionLayoutSection(group: group)
-            section.orthogonalScrollingBehavior = .groupPagingCentered
-            section.interGroupSpacing = 25
-            section.contentInsets = .init(top: 10, leading: 10, bottom: 0, trailing: 10)
-            
-            section.boundarySupplementaryItems = [self.supplementaryHeaderItem()]
-            section.supplementariesFollowContentInsets = false
-            
-            return section
-            
+    
+                return section
+    
+            }
         }
-    }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
-    }
+        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            return 3
+        }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath) as! ProductCollectionViewCell
-        cell.setUpWith(image: productDetails.images[indexPath.row])
-        
-    }
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath) as! ProductCollectionViewCell
+    //        cell.setUpWith(image: productDetails.images[indexPath.row])
+            cell.backgroundColor = .flatBlue()
+            return cell
     
+        }
 }

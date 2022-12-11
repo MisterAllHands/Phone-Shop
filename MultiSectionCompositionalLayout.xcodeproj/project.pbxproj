@@ -29,7 +29,7 @@
 		ED74E728293FF373003FF35A /* APIresponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74E727293FF373003FF35A /* APIresponse.swift */; };
 		ED9D906F294407F200FF04B0 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D906E294407F200FF04B0 /* ProductViewController.swift */; };
 		ED9D907B29453D9700FF04B0 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D907A29453D9700FF04B0 /* ProductCollectionViewCell.swift */; };
-		ED9D907D29454A4A00FF04B0 /* GloabalModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D907C29454A4A00FF04B0 /* GloabalModalView.swift */; };
+		ED9D907D29454A4A00FF04B0 /* GloadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D907C29454A4A00FF04B0 /* GloadViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +59,7 @@
 		ED74E727293FF373003FF35A /* APIresponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIresponse.swift; sourceTree = "<group>"; };
 		ED9D906E294407F200FF04B0 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		ED9D907A29453D9700FF04B0 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
-		ED9D907C29454A4A00FF04B0 /* GloabalModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GloabalModalView.swift; sourceTree = "<group>"; };
+		ED9D907C29454A4A00FF04B0 /* GloadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GloadViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,7 +192,7 @@
 		ED74E720293FF21D003FF35A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				ED9D907C29454A4A00FF04B0 /* GloabalModalView.swift */,
+				ED9D907C29454A4A00FF04B0 /* GloadViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -378,7 +378,7 @@
 				E52E5EAD2831359C00ACAAA3 /* ListItem.swift in Sources */,
 				E52E5E9D283121C000ACAAA3 /* ViewController.swift in Sources */,
 				ED1D1D0529425643000093EE /* getImage.swift in Sources */,
-				ED9D907D29454A4A00FF04B0 /* GloabalModalView.swift in Sources */,
+				ED9D907D29454A4A00FF04B0 /* GloadViewModel.swift in Sources */,
 				ED9D906F294407F200FF04B0 /* ProductViewController.swift in Sources */,
 				E52E5EB628313F1200ACAAA3 /* LandscapeCollectionViewCell.swift in Sources */,
 				E52E5E99283121C000ACAAA3 /* AppDelegate.swift in Sources */,
