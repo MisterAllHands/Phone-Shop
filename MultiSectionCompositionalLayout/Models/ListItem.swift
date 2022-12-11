@@ -14,3 +14,19 @@ struct ListItem {
     let urlToImage: URL?
     let imageData: Data? = nil
 }
+
+struct ProductItem {
+    
+    let CPU: String
+    let camera: String
+    let capacity: [String]
+    let color: [String]
+    let id: String
+    let images: [String]?
+    let isFavorites: Bool
+    let price: Int
+    let rating: Double
+    let sd: String
+    let ssd: String
+    let title: String
+}

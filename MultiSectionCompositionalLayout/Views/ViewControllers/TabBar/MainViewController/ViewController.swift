@@ -14,11 +14,8 @@ class ViewController: UIViewController {
     
     let images = ["1","2","3","4","5"]
     let labels = ["Phones", "Computer", "Health","Books","Tools"]
-    
 
-    
     var models = [ListItem]()
-    
     var apiResponse: APIresponse?
     
     private let sections = MockData.shared.pageData
@@ -27,21 +24,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.collectionViewLayout = createLayout()
-        fetchNews()
-        setBarButtonItem()
+        fetchMainScreen()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
     
-    
-    
-    func setBarButtonItem() {
-       
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
-    }
-    
-                                             
-                                                        
-    func fetchNews() {
+    func fetchMainScreen() {
 
         APICaller.shared.getPhones { result in
 
@@ -62,7 +51,6 @@ class ViewController: UIViewController {
             }
         }
     }
-    
     
     @IBAction func filterButtonPressed(_ sender: UIBarButtonItem) {
         
@@ -149,7 +137,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PortraitCollectionViewCell", for: indexPath) as! PortraitCollectionViewCell
             
-            DispatchQueue.main.asyncAfter(deadline: .now()+60){
+            DispatchQueue.main.asyncAfter(deadline: .now()+1){
                 cell.setup(item: (self.apiResponse?.home_store[indexPath.row])!)
             }
             
@@ -160,7 +148,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             
         case .bestSeller:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LandscapeCollectionViewCell", for: indexPath) as! LandscapeCollectionViewCell
-            DispatchQueue.main.asyncAfter(deadline: .now()+60) {
+            DispatchQueue.main.asyncAfter(deadline: .now()+1) {
                 cell.setup(item: (self.apiResponse?.best_seller[indexPath.row])!)
             }
             
@@ -183,6 +171,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destionatio = segue.destination as! ProductViewController
         
+    
     }
     
     //MARK - Setting up the header for each section

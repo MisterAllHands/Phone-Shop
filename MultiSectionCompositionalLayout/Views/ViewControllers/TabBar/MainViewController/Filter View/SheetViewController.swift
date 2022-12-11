@@ -8,7 +8,7 @@
 import UIKit
 import DropDown
 
-class SheetViewController: UIViewController, UITextFieldDelegate {
+class SheetViewController: UIViewController {
     
     var hasSetPointOrigin = false
     var pointOrigin: CGPoint?
