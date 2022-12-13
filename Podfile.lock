@@ -1,19 +1,31 @@
 PODS:
+  - AARatingBar (1.2)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
+  - Cosmos (23.0.0)
   - DropDown (2.3.13)
   - Gemini (1.4.0)
+  - LZViewPager (1.2.5):
+    - SnapKit (~> 5.0.0)
+  - SnapKit (5.0.1)
 
 DEPENDENCIES:
+  - AARatingBar
   - ChameleonFramework/Swift (from `https://github.com/wowansm/Chameleon.git`, branch `swift5`)
+  - Cosmos
   - DropDown
   - Gemini
+  - LZViewPager (~> 1.2.5)
 
 SPEC REPOS:
   trunk:
+    - AARatingBar
+    - Cosmos
     - DropDown
     - Gemini
+    - LZViewPager
+    - SnapKit
 
 EXTERNAL SOURCES:
   ChameleonFramework:
@@ -26,10 +38,14 @@ CHECKOUT OPTIONS:
     :git: https://github.com/wowansm/Chameleon.git
 
 SPEC CHECKSUMS:
+  AARatingBar: dc54d24687ae97688ffdb29738332d0bc5c0c09f
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   Gemini: 4ad915cca8805577fe3021e02feeca2b77dcdbfc
+  LZViewPager: 89ddd98246d54b52bde14c8d91702f946d6f8893
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: b4595eebcddbf53c66f3b2bb710815680bd71438
+PODFILE CHECKSUM: 111b0d49493e352641ace5d24120eefebe3ac649
 
 COCOAPODS: 1.11.3

@@ -11,7 +11,6 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         ChangeRadiusOfTabbar()
         
     }
@@ -27,23 +26,19 @@ class TabBarController: UITabBarController {
             self.tabBar.layer.cornerRadius = 30
             self.tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
             self.tabBar.tintColor = FlatWhite()
-    
         
         //Change background color
         
-
             let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
             tabBarAppearance.backgroundColor = .flatBlueDark()
 
             UITabBar.appearance().standardAppearance = tabBarAppearance
             UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
             
-        
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         SimpleAnnimationWhenSelectItem(item)
-        HandleActionWhenSelectItem(item)
     }
     
     func SimpleAnnimationWhenSelectItem(_ item: UITabBarItem){
@@ -55,23 +50,6 @@ class TabBarController: UITabBarController {
             }
             propertyAnimator.addAnimations({ barItemView.transform = .identity }, delayFactor: CGFloat(timeInterval))
             propertyAnimator.startAnimation()
-    }
-           
- 
-
-    func HandleActionWhenSelectItem(_ item: UITabBarItem){
         
-        switch item{
-        case (self.tabBar.items!)[0]:
-            print("went to home")
-        case (self.tabBar.items!)[1]:
-            print("wemt to cart")
-        case (self.tabBar.items!)[2]:
-            print("wemt to favorites")
-        case (self.tabBar.items![3]):
-            print("went to profile")
-        default:
-            print("went home")
-        }
     }
 }

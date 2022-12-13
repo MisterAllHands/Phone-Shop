@@ -38,23 +38,3 @@ struct BestSellerItem: Codable{
     let picture: String?
 
 }
-
-//MARK: - Product Details
-
-struct ProductDetails: Codable{
-    
-    let CPU: String
-    let camera: String
-    let capacity: [String]
-    let color: [String]
-    let id: String
-    let images: [String]?
-    let isFavorites: Bool
-    let price: Int
-    let rating: Double
-    let sd: String
-    let ssd: String
-    let title: String
-}
-
-

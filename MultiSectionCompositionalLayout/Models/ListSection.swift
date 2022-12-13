@@ -8,11 +8,11 @@
 import Foundation
 
 enum ListSection {
-    case category([ListItem])
-    case hotSales([ListItem])
-    case bestSeller([ListItem])
+    case category([HomeStore])
+    case hotSales([HomeStore])
+    case bestSeller([HomeStore])
     
-    var items: [ListItem] {
+    var items: [HomeStore] {
         switch self {
         case .category(let items),
                 .hotSales(let items),

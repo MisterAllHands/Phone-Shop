@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ListItem {
+struct HomeStore {
     
     let title: String
     let subtitle: String

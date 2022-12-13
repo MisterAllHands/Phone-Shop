@@ -15,14 +15,16 @@ class ViewController: UIViewController {
     let images = ["1","2","3","4","5"]
     let labels = ["Phones", "Computer", "Health","Books","Tools"]
 
-    var models = [ListItem]()
+    var models = [HomeStore]()
     var apiResponse: APIresponse?
+    
     
     private let sections = MockData.shared.pageData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(models.count)
+
         collectionView.collectionViewLayout = createLayout()
         fetchMainScreen()
     }
@@ -37,7 +39,7 @@ class ViewController: UIViewController {
             switch result {
             case .success(let home_store):
                 self.apiResponse = home_store
-                self.models = home_store.home_store.compactMap({ListItem(
+                self.models = home_store.home_store.compactMap({HomeStore(
                     title: $0.title,
                     subtitle: $0.subtitle,
                     urlToImage: URL(string: $0.picture ?? ""))
@@ -137,9 +139,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PortraitCollectionViewCell", for: indexPath) as! PortraitCollectionViewCell
             
-            DispatchQueue.main.asyncAfter(deadline: .now()+1){
-                cell.setup(item: (self.apiResponse?.home_store[indexPath.row])!)
-            }
+                cell.setup(item: models[indexPath.row])
+            
             
             cell.layer.masksToBounds = true
             cell.layer.cornerRadius = cell.frame.height / 8
@@ -148,7 +149,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             
         case .bestSeller:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LandscapeCollectionViewCell", for: indexPath) as! LandscapeCollectionViewCell
-            DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                 cell.setup(item: (self.apiResponse?.best_seller[indexPath.row])!)
             }
             
@@ -169,7 +170,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destionatio = segue.destination as! ProductViewController
+        let destionation = segue.destination as! ProductViewController
         
     
     }

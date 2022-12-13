@@ -9,4 +9,7 @@ target 'MultiSectionCompositionalLayout' do
 pod 'Gemini'
 pod 'ChameleonFramework/Swift', :git => 'https://github.com/wowansm/Chameleon.git', :branch => 'swift5'
 pod "DropDown"
+pod 'AARatingBar'
+pod 'LZViewPager', '~> 1.2.5'
+pod 'Cosmos'
 end
