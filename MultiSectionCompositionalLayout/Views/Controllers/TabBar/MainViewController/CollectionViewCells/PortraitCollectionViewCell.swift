@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SDWebImage
+
 
 final class PortraitCollectionViewCell: UICollectionViewCell {
     
@@ -14,24 +16,15 @@ final class PortraitCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var itemSubtitle: UILabel!
     @IBOutlet weak var buyButton: UIButton!
     
-    func setup(item: HomeStore) {
+    func setup(item: HomeStoreItem) {
         
         itemName.text = item.title
-        itemSubtitle.text = item.subtitle        
-    
-            
-        if let url = item.urlToImage{
-            //fetch
-            URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-                guard let data = data, error == nil else {
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    self?.cellImageView.image = UIImage(data: data)
-                }
-            }.resume()
-        }
+        itemSubtitle.text = item.subtitle
+        cellImageView.sd_setImage(with: URL(string: item.picture),
+                                  placeholderImage: UIImage(named: "photo"),
+                                  options: .continueInBackground,
+                                  completed: nil)
+
     }
         
         @IBAction func buyButtonPressed(_ sender: UIButton) {

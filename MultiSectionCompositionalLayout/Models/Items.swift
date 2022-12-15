@@ -12,7 +12,6 @@ struct HomeStore {
     let title: String
     let subtitle: String
     let urlToImage: URL?
-    let imageData: Data? = nil
 }
 
 struct ProductItem {
@@ -21,8 +20,7 @@ struct ProductItem {
     let camera: String
     let capacity: [String]
     let color: [String]
-    let id: String
-    let images: [String]?
+    let images: [String]
     let isFavorites: Bool
     let price: Int
     let rating: Double

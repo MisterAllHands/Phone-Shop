@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SDWebImage
+
 
 final class LandscapeCollectionViewCell: UICollectionViewCell {
     
@@ -22,13 +24,11 @@ final class LandscapeCollectionViewCell: UICollectionViewCell {
         mainPrice.text = "$\(item.price_without_discount)"
         discountPrice.text = String(item.discount_price)
         itemName.text = item.title
-        
-        if let imageData = item.picture{
-            let url =  URL(string: imageData)
-            cellImageView.load(url: url!)
-
-        }
-        
+        cellImageView.sd_setImage(with: URL(string: item.picture),
+                                  placeholderImage: UIImage(named: "photo"),
+                                  options: .continueInBackground,
+                                  completed: nil)          
+    
         //Setting linestrike for the label text
         
         let attributeString = NSMutableAttributedString(string: "$\(item.discount_price)")

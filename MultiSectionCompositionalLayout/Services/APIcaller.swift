@@ -19,6 +19,7 @@ struct APICaller {
     
     func getPhones( completion: @escaping (Result<APIresponse, Error>) -> Void) {
         
+        //Home Store
         if let url = URL(string: "\(mainUrl)") {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 

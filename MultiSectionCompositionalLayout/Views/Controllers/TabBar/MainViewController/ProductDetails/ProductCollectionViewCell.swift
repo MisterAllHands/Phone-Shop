@@ -7,19 +7,14 @@
 
 import UIKit
 import Gemini
+import SDWebImage
 
 class ProductCollectionViewCell: GeminiCell {
     
     @IBOutlet weak var productImage: UIImageView!
     
-    func setUpWith(image: [String], indexPath: IndexPath){
-         let images = image[indexPath.row]
-             let url = URL(string: images)
-            productImage.load(url: url!)
-        }
-    
+  
     override func layoutSubviews() {
-        
         
         // cell shadow section
         

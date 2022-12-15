@@ -18,13 +18,11 @@ class ViewController: UIViewController {
     var models = [HomeStore]()
     var apiResponse: APIresponse?
     
-    
     private let sections = MockData.shared.pageData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(models.count)
-
+        
         collectionView.collectionViewLayout = createLayout()
         fetchMainScreen()
     }
@@ -139,8 +137,9 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PortraitCollectionViewCell", for: indexPath) as! PortraitCollectionViewCell
             
-                cell.setup(item: models[indexPath.row])
-            
+            DispatchQueue.main.asyncAfter(deadline: .now()+1){
+                cell.setup(item: (self.apiResponse?.home_store[indexPath.row])!)
+            }
             
             cell.layer.masksToBounds = true
             cell.layer.cornerRadius = cell.frame.height / 8
@@ -149,7 +148,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             
         case .bestSeller:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LandscapeCollectionViewCell", for: indexPath) as! LandscapeCollectionViewCell
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                 cell.setup(item: (self.apiResponse?.best_seller[indexPath.row])!)
             }
             

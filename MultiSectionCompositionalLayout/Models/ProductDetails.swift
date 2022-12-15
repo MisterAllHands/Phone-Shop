@@ -14,7 +14,7 @@ struct ProductDetails: Codable{
     let capacity: [String]
     let color: [String]
     let id: String
-    var images: [String]?
+    var images: [String]
     let isFavorites: Bool
     let price: Int
     var rating: Double
