@@ -40,7 +40,7 @@ class ViewController: UIViewController {
                 self.models = home_store.home_store.compactMap({HomeStore(
                     title: $0.title,
                     subtitle: $0.subtitle,
-                    urlToImage: URL(string: $0.picture ?? ""))
+                    urlToImage: URL(string: $0.picture))
                 })
 
                 DispatchQueue.main.async {
@@ -130,14 +130,14 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         case .category:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoryCollectionViewCell", for: indexPath) as! StoryCollectionViewCell
             cell.setup(with: images[indexPath.row], title: labels[indexPath.row])
-           
+
             return cell
             
         case .hotSales:
             
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PortraitCollectionViewCell", for: indexPath) as! PortraitCollectionViewCell
             
-            DispatchQueue.main.asyncAfter(deadline: .now()+1){
+            DispatchQueue.main.asyncAfter(deadline: .now()+5){
                 cell.setup(item: (self.apiResponse?.home_store[indexPath.row])!)
             }
             
@@ -148,7 +148,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             
         case .bestSeller:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LandscapeCollectionViewCell", for: indexPath) as! LandscapeCollectionViewCell
-            DispatchQueue.main.asyncAfter(deadline: .now()+2) {
+            DispatchQueue.main.asyncAfter(deadline: .now()+5) {
                 cell.setup(item: (self.apiResponse?.best_seller[indexPath.row])!)
             }
             
@@ -160,7 +160,9 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         
         switch sections[indexPath.section]{
         case .category:
-            print(sections[indexPath.section].title)
+            if indexPath.row == 1 {
+                collectionView.scrollToItem(at: IndexPath(row: 4, section: 0), at: .right, animated: true)
+                        }
         case .hotSales:
             print(sections[indexPath.section].title)
         case .bestSeller:

@@ -66,4 +66,30 @@ struct APICaller {
             task.resume()
         }
     }
+    
+    //MARK: - Fetching Cart items
+    
+    
+    func getCartItems( completion: @escaping (Result<CartAddedItems, Error>) -> Void) {
+        
+        if let url = URL(string: "\(cartUrl)") {
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                
+                //MARK - Parsing JSON
+                
+                if error != nil {
+                    completion(.failure(error!))
+                }else if let safeData = data {
+                    do{
+                        let decodedData = try JSONDecoder().decode(CartAddedItems.self, from: safeData)
+                        print(decodedData)
+                        completion(.success(decodedData))
+                    }catch{
+                        completion(.failure(error))
+                    }
+                }
+            }
+            task.resume()
+        }
+    }
 }

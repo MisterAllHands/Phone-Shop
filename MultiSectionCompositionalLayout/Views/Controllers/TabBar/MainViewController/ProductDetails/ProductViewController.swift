@@ -291,7 +291,7 @@ extension ProductViewController{
         secondColor.layer.cornerRadius = secondColor.frame.height / 2
         secondColor.setImage(UIImage(named: "done"), for: .normal)
         
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.4){
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
             self.firstColor.backgroundColor = UIColor(hexString: (self.productDetails?.color.first)!)
             self.secondColor.backgroundColor = UIColor(hexString: (self.productDetails?.color.last)!)
         }

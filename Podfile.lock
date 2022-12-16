@@ -11,6 +11,7 @@ PODS:
     - SDWebImage/Core (= 3.8.3)
   - SDWebImage/Core (3.8.3)
   - SnapKit (5.0.1)
+  - SwiftyStepper (1.0.0)
 
 DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/wowansm/Chameleon.git`, branch `swift5`)
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - Gemini
   - LZViewPager (~> 1.2.5)
   - SDWebImage (~> 3.7)
+  - SwiftyStepper
 
 SPEC REPOS:
   trunk:
@@ -28,6 +30,7 @@ SPEC REPOS:
     - LZViewPager
     - SDWebImage
     - SnapKit
+    - SwiftyStepper
 
 EXTERNAL SOURCES:
   ChameleonFramework:
@@ -47,7 +50,8 @@ SPEC CHECKSUMS:
   LZViewPager: 89ddd98246d54b52bde14c8d91702f946d6f8893
   SDWebImage: a72e880a8fe0f7fc31efe15aaed443c074d2a80c
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftyStepper: 26abb82d80b5bb20f4d370f243c0a7a4c9ddedaf
 
-PODFILE CHECKSUM: 7be7408e5eda94c6b02f3cfd455c60d9e270db47
+PODFILE CHECKSUM: f9a7d93a7262b67e364ed018a3a825904e1f7a56
 
 COCOAPODS: 1.11.3

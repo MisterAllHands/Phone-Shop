@@ -12,4 +12,5 @@ pod "DropDown"
 pod 'LZViewPager', '~> 1.2.5'
 pod 'Cosmos'
 pod 'SDWebImage', '~> 3.7'
+pod 'SwiftyStepper'
 end

@@ -42,8 +42,8 @@ class TabBarController: UITabBarController {
     }
     
     func SimpleAnnimationWhenSelectItem(_ item: UITabBarItem){
-            guard let barItemView = item.value(forKey: "view") as? UIView else { return }
-
+        
+        guard let barItemView = item.value(forKey: "view") as? UIView else { return }
             let timeInterval: TimeInterval = 0.5
             let propertyAnimator = UIViewPropertyAnimator(duration: timeInterval, dampingRatio: 0.5) {
                 barItemView.transform = CGAffineTransform.identity.scaledBy(x: 1.4, y: 1.4)

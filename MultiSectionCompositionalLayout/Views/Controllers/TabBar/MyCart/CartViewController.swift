@@ -7,16 +7,39 @@
 
 import UIKit
 
+
 class CartViewController: UIViewController, UIGestureRecognizerDelegate {
+  
     
-    
+    @IBOutlet weak var myTableView: UITableView!
+    @IBOutlet weak var checkOut: UIButton!
     @IBOutlet weak var containerView: UIView!
+    
+    var models: CartItem?
+    var response: CartAddedItems?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.delegate = self
+        myTableView.delegate = self
+        myTableView.dataSource = self
+        
+        myTableView.register(UINib(nibName: "CustomItemsCell", bundle: nil), forCellReuseIdentifier: "CustomItemsCell")
+        self.myTableView.register(CustomItemsCell.self, forCellReuseIdentifier: "tableViewCell")
+        
+        APICaller.shared.getCartItems { resul in
+            
+        }
+        
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         CustomizedView.setViewConstrainsts(with: containerView)
         customNavbarItems()
+        checkOut.layer.cornerRadius = checkOut.frame.height / 4
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     
@@ -51,4 +74,26 @@ class CartViewController: UIViewController, UIGestureRecognizerDelegate {
         navigationController?.popViewController(animated: true)
     }
     
+}
+
+//MARK: - TableView Delegate & Datasource Methods
+
+extension CartViewController: UITableViewDelegate, UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomItemsCell", for: indexPath) as! CustomItemsCell
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
