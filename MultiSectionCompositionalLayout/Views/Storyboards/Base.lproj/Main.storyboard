@@ -878,20 +878,17 @@
         <scene sceneID="s5W-KH-koi">
             <objects>
                 <viewController id="rLc-04-gxX" customClass="CartViewController" customModule="MultiSectionCompositionalLayout" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="keZ-uJ-6DL">
+                    <view key="view" contentMode="scaleToFill" id="keZ-uJ-6DL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LEb-hq-xyG">
-                                <rect key="frame" x="0.0" y="300" width="414" height="596"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LEb-hq-xyG">
+                                <rect key="frame" x="0.0" y="296" width="414" height="600"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eAe-Cg-VWa">
-                                        <rect key="frame" x="0.0" y="30" width="414" height="334"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eAe-Cg-VWa">
+                                        <rect key="frame" x="0.0" y="30" width="414" height="336"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="334" id="hji-6W-mwH"/>
-                                        </constraints>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="c5m-Sj-44g" customClass="CustomItemsCell" customModule="MultiSectionCompositionalLayout" customModuleProvider="target">
@@ -905,7 +902,7 @@
                                         </prototypes>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rmb-Bm-hMn">
-                                        <rect key="frame" x="30" y="518" width="354" height="50"/>
+                                        <rect key="frame" x="30" y="520" width="354" height="50"/>
                                         <color key="backgroundColor" red="1" green="0.43353834707251215" blue="0.23426753390555677" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="DQn-7N-ft7"/>
@@ -917,7 +914,7 @@
                                         </buttonConfiguration>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dyv-AF-d29">
-                                        <rect key="frame" x="0.0" y="364" width="414" height="123"/>
+                                        <rect key="frame" x="0.0" y="366" width="414" height="123"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IgZ-0c-Dhy">
                                                 <rect key="frame" x="15" y="45" width="70" height="25"/>
@@ -973,7 +970,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sz9-Ff-HQc">
-                                        <rect key="frame" x="0.0" y="497" width="414" height="1"/>
+                                        <rect key="frame" x="0.0" y="499" width="414" height="1"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="87G-Y1-uSs"/>
@@ -1003,7 +1000,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Cart" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4S-qG-5wJ">
-                                <rect key="frame" x="20" y="167" width="150" height="60"/>
+                                <rect key="frame" x="20" y="163" width="150" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="RWC-U5-hyV"/>
                                     <constraint firstAttribute="height" constant="60" id="ldz-hD-lDM"/>
@@ -1022,7 +1019,7 @@
                             <constraint firstItem="LEb-hq-xyG" firstAttribute="top" secondItem="i4S-qG-5wJ" secondAttribute="bottom" constant="73" id="SO6-MD-lhP"/>
                             <constraint firstItem="WOD-3V-hUw" firstAttribute="trailing" secondItem="LEb-hq-xyG" secondAttribute="trailing" id="auv-QH-SeG"/>
                             <constraint firstItem="WOD-3V-hUw" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="i4S-qG-5wJ" secondAttribute="trailing" symbolic="YES" id="irT-fd-BaD"/>
-                            <constraint firstItem="i4S-qG-5wJ" firstAttribute="top" secondItem="WOD-3V-hUw" secondAttribute="top" constant="79" id="jmp-bi-JTf"/>
+                            <constraint firstItem="i4S-qG-5wJ" firstAttribute="top" secondItem="WOD-3V-hUw" secondAttribute="top" constant="75" id="jmp-bi-JTf"/>
                             <constraint firstItem="LEb-hq-xyG" firstAttribute="leading" secondItem="WOD-3V-hUw" secondAttribute="leading" id="ld5-bW-g9p"/>
                         </constraints>
                     </view>
@@ -1137,7 +1134,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="rGo-2m-m89"/>
+        <segue reference="1Ie-ai-sSW"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bag" width="25" height="25"/>

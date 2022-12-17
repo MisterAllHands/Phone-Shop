@@ -25,26 +25,27 @@ class CustomItemsCell: UITableViewCell {
         
     }
     
-    func setUpWith(item: Basket){
+    func setUpWith(item: Baskets){
         
-        itemLabel.text = "\(item.title)"
+        itemLabel.text = item.title
         itemPrice.text = "\(item.price)"
-        let urlstring = URL(string: item.images)
+        let urlstring = URL(string: item.images ?? "")
+            
+            itemImage.sd_setImage(with: urlstring )
+            itemImage.layer.cornerRadius = 20
         
-        itemImage.sd_setImage(with: urlstring )
-        itemImage.layer.cornerRadius = 20
         
     }
 
     @IBAction func stepper(_ sender: SwiftyStepper) {
             
             let intConverted = Double(itemPrice.text!)
-            print(intConverted)
+           
+        
             itemPrice.text = String(sender.value * (intConverted ?? 1))
         
-            DispatchQueue.main.asyncAfter(deadline: .now()+1){
-                self.performTask(send: "updateView")
-            }
+            self.performTask(send: "updateView")
+            
     }
     
     func performTask(send: String) {

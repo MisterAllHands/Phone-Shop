@@ -1,3 +1,5 @@
+
+
 import Foundation
 import UIKit
 import ChameleonFramework
@@ -13,7 +15,8 @@ class TabBarController: UITabBarController {
     var customTabBarView = UIView(frame: .zero)
         
     // MARK: View lifecycle
-    var baskets: [Basket] = []
+    var initialValue: Int = 0
+    var baskets: [Baskets] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,18 +30,29 @@ class TabBarController: UITabBarController {
                         name: Notification.Name( "removeValue"), object: nil)
         
         
-        APICaller.shared.getCartItems { [self] result in
-            switch result {
-            case .success(let data):
-                self.baskets = data.basket
+//        APICaller.shared.getCartItems { [self] result in
+//            switch result {
+//            case .success(let data):
+//                self.baskets = data.basket
                 DispatchQueue.main.async {[self] in
-                    tabBar.items?[1].badgeValue = "\(baskets.count)"
+                    initialValue = baskets.count
+//                    initialValue = baskets.count
+                    tabBar.items?[1].badgeValue = "\(initialValue)"
                 }
-            case .failure(let failure):
-                print(failure)
-            }
-        }
-        tabBar.items?[1].badgeValue = "\(baskets.count)"
+//            case .failure(let failure):
+//                print(failure)
+//            }
+//        }
+//        if baskets.count > 0 {
+//            let basketValue = initialValue + baskets.count
+//            DispatchQueue.main.async {[self] in
+//
+//                tabBar.items?[1].badgeValue = "\(initialValue)"
+//            }
+//        }else{
+//            tabBar.items?[1].badgeValue = "\(0)"
+//        }
+        tabBar.items?[1].badgeValue = "\(initialValue)"
         ChangeRadiusOfTabbar()
     }
     
@@ -46,17 +60,22 @@ class TabBarController: UITabBarController {
         super.viewWillLayoutSubviews()
     }
         
-    @objc func addBadgeValue() {
-            DispatchQueue.main.async {
-                self.tabBar.items?[1].badgeValue = "\(self.baskets.count + 1)"
-            }
+    @objc func addBadgeValue(_ notification: NSNotification) {
+            let changedValue = initialValue + 1
+                DispatchQueue.main.async {
+                    self.tabBar.items?[1].badgeValue = "\(changedValue)"
+                }
+            initialValue = changedValue
+        
     }
     
-    @objc func removeBadgeValue() {
-        DispatchQueue.main.async {
-            self.tabBar.items?[1].badgeValue = "\(self.baskets.count - 1)"
+    @objc func removeBadgeValue(_ notification: NSNotification) {
+            let changedValue = initialValue - 1
+            DispatchQueue.main.async {
+                self.tabBar.items?[1].badgeValue = "\(changedValue)"
+            }
+            initialValue = changedValue
         }
-    }
     
     func ChangeRadiusOfTabbar(){
         

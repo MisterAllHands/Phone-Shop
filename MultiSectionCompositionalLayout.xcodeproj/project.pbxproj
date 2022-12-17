@@ -150,24 +150,8 @@
 				ED1D1CD8294166F5000093EE /* CustomTabBarController.swift */,
 				ED74E723293FF26D003FF35A /* MainViewController */,
 				ED74E725293FF2EF003FF35A /* MyCart */,
-				ED1D1CD629416672000093EE /* favorites */,
-				ED1D1CD7294166A0000093EE /* Profile */,
 			);
 			path = TabBar;
-			sourceTree = "<group>";
-		};
-		ED1D1CD629416672000093EE /* favorites */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = favorites;
-			sourceTree = "<group>";
-		};
-		ED1D1CD7294166A0000093EE /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Profile;
 			sourceTree = "<group>";
 		};
 		ED1D1D06294281C2000093EE /* Filter View */ = {

@@ -5,11 +5,13 @@
 //  Created by TTGMOTSF on 17/12/2022.
 //
 
-import Foundation
+
 import UIKit
 import CoreData
 
 class DatapersistantManager{
+    
+    static let shared = DatapersistantManager()
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -18,16 +20,18 @@ class DatapersistantManager{
         case failedFetching
     }
     
-    static let shared = DatapersistantManager()
     
-    func addItemToFavorites(model: Basket, completion: @escaping(Result<Void, Error>) -> Void){
+    
+    //MARK: - Saving data
+    
+    func addItemToFavorites(model: BestSellerItem, completion: @escaping(Result<Void, Error>) -> Void){
         
         let basket = Baskets(context: context)
         
-        basket.id = Int64(model.id)
+        basket.id = Int64(model.id!)
         basket.title = model.title
-        basket.images = model.images
-        basket.price = Int64(model.price)
+        basket.images = model.picture
+        basket.price = Int64(model.price_without_discount)
         
         do{
             try context.save()
@@ -37,9 +41,10 @@ class DatapersistantManager{
         }
     }
     
+    //MARK: - Fetching Data
+    
     func fetchingDataToDataBase(completion: @escaping(Result<[Baskets], Error>) -> Void){
         
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         let request: NSFetchRequest <Baskets>
             
@@ -53,8 +58,9 @@ class DatapersistantManager{
         }
     }
     
+    //MARK: - Deleting Data
+    
     func deleteDataFromDatabase(model: Baskets, completion: @escaping(Result<Void, Error>) -> Void){
-        
         
         context.delete(model)
         

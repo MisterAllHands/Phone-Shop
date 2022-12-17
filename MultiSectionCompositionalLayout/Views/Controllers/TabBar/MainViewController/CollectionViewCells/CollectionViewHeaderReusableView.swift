@@ -2,7 +2,7 @@
 //  CollectionViewHeaderReusableView.swift
 //  MultiSectionCompositionalLayout
 //
-//  Created by Emmanuel Okwara on 21.05.22.
+//  Created by TTGMOTSF on 9/12/22.
 //
 
 import UIKit

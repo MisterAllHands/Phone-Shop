@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  MultiSectionCompositionalLayout
 //
-//  Created by TTGMOTSF.
+//  Created by TTGMOTSF on 7.12.22
 //
 
 import UIKit
@@ -162,7 +162,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         
         switch sections[indexPath.section]{
         case .category:
-            if indexPath.row == 1 {
+            if indexPath.row == 2 {
                 collectionView.scrollToItem(at: IndexPath(row: 4, section: 0), at: .right, animated: true)
                         }
         case .hotSales:

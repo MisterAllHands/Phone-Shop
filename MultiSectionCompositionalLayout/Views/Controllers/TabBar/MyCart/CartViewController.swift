@@ -18,9 +18,8 @@ class CartViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var total: UILabel!
     
     
-    var models: [Basket] = []
+    var models: [Baskets] = []
     var response: CartAddedItems?
-    
          
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +27,14 @@ class CartViewController: UIViewController, UIGestureRecognizerDelegate {
         myTableView.delegate = self
         myTableView.dataSource = self
         
-        APICaller.shared.getCartItems { result in
-            switch result {
-            case .success(let data):
-                self.models = data.basket
-            case .failure(let failure):
-                print(failure)
-            }
-        }
+//        APICaller.shared.getCartItems { result in
+//            switch result {
+//            case .success(let data):
+//                self.models = data.basket
+//            case .failure(let failure):
+//                print(failure)
+//            }
+//        }
         
         fetchLocalStorageForFavorites()
         
@@ -66,7 +65,7 @@ class CartViewController: UIViewController, UIGestureRecognizerDelegate {
         DatapersistantManager.shared.fetchingDataToDataBase {[weak self] result in
             switch result{
             case .success(let baskets):
-                self?.models = baskets as! [Basket]
+                self?.models = baskets
                 
                 DispatchQueue.main.async {
                     self?.myTableView.reloadData()
@@ -105,6 +104,7 @@ class CartViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc private func popToPrevious() {
+        self.tabBarController?.tabBar.isHidden = false
         navigationController?.popViewController(animated: true)
 
     }
@@ -117,6 +117,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomItemsCell", for: indexPath) as! CustomItemsCell
         cell.setUpWith(item: self.models[indexPath.row])
+        cell.deleteItem.addTarget(self, action: #selector(deletesItem), for: .touchUpInside)
         
         return cell
     }
@@ -130,30 +131,35 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        DispatchQueue.main.asyncAfter(deadline: .now()+5){
-            tableView.reloadData()
-            
-        }
+
         return models.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
     
     @objc func deletesItem(){
-       
-        DatapersistantManager.shared.deleteDataFromDatabase(model: models[indexPath.row]) { result in
-            switch result{
-            case .success():
-                print("Successfully deleted Item")
-            case .failure():
-                print("Error while deleting the item at selected row ")
-            }
-        }
+
+        let alert = UIAlertController(title: "Are you sure you want to delete the item from your Cart ?", message: "", preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: "Yes", style: .destructive, handler: deleteItemFromCart)
+        let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
+    
+    func deleteItemFromCart(action: UIAlertAction){
         
+//        DatapersistantManager.shared.deleteDataFromDatabase(model: models[indexPath.row]) { result in
+//            switch result{
+//            case .success():
+//                print("Successfully deleted Item")
+//            case .failure():
+//                print("Error while deleting the item at selected row ")
+//            }
+//        }
+        
+        print("deleted")
     }
 }

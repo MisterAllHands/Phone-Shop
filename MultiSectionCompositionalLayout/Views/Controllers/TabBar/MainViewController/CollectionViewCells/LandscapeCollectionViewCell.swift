@@ -2,7 +2,7 @@
 //  LandscapeCollectionViewCell.swift
 //  MultiSectionCompositionalLayout
 //
-//  Created by Emmanuel Okwara on 15.05.22.
+//   Created by TTGMOTSF on 8/12/22.
 //
 
 import UIKit
@@ -11,18 +11,20 @@ import SDWebImage
 
 final class LandscapeCollectionViewCell: UICollectionViewCell {
     
-    var models: Basket?
+    var models: BestSellerItem?
    
+    var savedModels: Baskets?
     
     @IBOutlet weak var cellImageView: UIImageView!
     @IBOutlet weak var mainPrice: UILabel!
     @IBOutlet weak var discountPrice: UILabel!
     @IBOutlet weak var itemName: UILabel!
     @IBOutlet weak var likedItem: UIButton!
+    
     var isLiked = false
     
-    
     func setup(item: BestSellerItem) {
+        self.models = item
         mainPrice.text = "$\(item.price_without_discount)"
         discountPrice.text = String(item.discount_price)
         itemName.text = item.title
@@ -57,21 +59,38 @@ final class LandscapeCollectionViewCell: UICollectionViewCell {
     
             if isLiked{
                 likedItem.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-    
-               
-    
-                DatapersistantManager.shared.addItemToFavorites(model: models ?? Basket ) { result in
-                        print("Downloaded")
-                    }
-    
+   
                 
-                DispatchQueue.main.asyncAfter(deadline: .now()+0.3){
+                if let safeModel = models {
+                    DatapersistantManager.shared.addItemToFavorites(model: safeModel ) { result in
+                        switch result {
+                        case .success():
+                            print("Downloaded")
+                        case .failure(let failure):
+                                print("Error")
+                                print(failure)
+                        }
+                    }
+                }
+
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
                     self.performTask(send: "addValue")
                 }
             }
             else{
+                
                 likedItem.setImage(UIImage(systemName: "heart"), for: .normal)
-                DispatchQueue.main.asyncAfter(deadline: .now()+0.3){
+                
+                DatapersistantManager.shared.deleteDataFromDatabase(model: savedModels!) { result in
+                    switch result{
+                    case .success():
+                        print("Success")
+                    case .failure():
+                        print("Error")
+                    }
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
                     self.performTask(send: "removeValue")
                 }
             }
