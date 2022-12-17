@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  MultiSectionCompositionalLayout
 //
-//  Created by Emmanuel Okwara on 15.05.22.
+//  Created by TTGMOTSF on 4/12/22
 //
 
 import UIKit

@@ -24,12 +24,6 @@ final class PortraitCollectionViewCell: UICollectionViewCell {
                                   placeholderImage: UIImage(named: "photo"),
                                   options: .continueInBackground,
                                   completed: nil)
-
-    }
         
-        @IBAction func buyButtonPressed(_ sender: UIButton) {
-            
-            print("Bought!")
-            
-        }
+    }
 }

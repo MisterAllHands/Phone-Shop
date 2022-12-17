@@ -24,17 +24,17 @@
                             <constraint firstAttribute="height" constant="80" id="ay2-NP-BjQ"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Galaxy Note 20 Ultra" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76X-X0-SDK">
-                        <rect key="frame" x="108" y="30" width="140" height="55"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76X-X0-SDK">
+                        <rect key="frame" x="108" y="30" width="140" height="0.0"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="140" id="rva-QD-WnS"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="23"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$1500.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1q-ab-bet">
-                        <rect key="frame" x="108" y="91" width="150" height="30"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1q-ab-bet">
+                        <rect key="frame" x="108" y="36" width="150" height="0.0"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="150" id="tsH-gV-Avh"/>
                         </constraints>
@@ -114,7 +114,6 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="deleteItem" destination="6N8-UE-EkE" id="Gbc-rQ-Yiu"/>
                 <outlet property="itemImage" destination="WsN-fE-ayS" id="XW6-yO-4s3"/>
                 <outlet property="itemLabel" destination="76X-X0-SDK" id="cVd-4e-JFY"/>
                 <outlet property="itemPrice" destination="l1q-ab-bet" id="4qf-eF-r0k"/>

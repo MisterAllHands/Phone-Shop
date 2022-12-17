@@ -2,11 +2,10 @@
 //  MockData.swift
 //  MultiSectionCompositionalLayout
 //
-//  Created by Emmanuel Okwara on 21.05.22.
+//  Created by TTGMOTSF on 4/12/22
 //
 
 import Foundation
-
 
 struct MockData {
     
@@ -35,7 +34,7 @@ struct MockData {
                      .init(title: "", subtitle: "", urlToImage: URL(string: ""))])
     }()
     
-    var pageData: [ListSection] {
+    var pageData: [ListSection]{
         [category, hotSales, bestSeller]
     }
 }

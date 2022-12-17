@@ -13,12 +13,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var filterButton: UIBarButtonItem!
     
     let images = ["1","2","3","4","5"]
+    let highlightedImages = ["phone2","laptop2","heart2","books2","tools3"]
     let labels = ["Phones", "Computer", "Health","Books","Tools"]
 
     var models = [HomeStore]()
     var apiResponse: APIresponse?
     
     private let sections = MockData.shared.pageData
+    
+    var itemIsSelected = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +61,8 @@ class ViewController: UIViewController {
         presentBottomSheet()
         
     }
+    //MARK: - Creating Collections
+    
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
         UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
@@ -69,7 +75,7 @@ class ViewController: UIViewController {
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .absolute(90), heightDimension: .absolute(100)), subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .paging
-                section.interGroupSpacing = 10
+                section.interGroupSpacing = 15
                 section.contentInsets = .init(top: 10, leading: 10, bottom: 30, trailing: 10)
                 section.boundarySupplementaryItems = [self.supplementaryHeaderItem()]
                 section.supplementariesFollowContentInsets = false
@@ -96,7 +102,6 @@ class ViewController: UIViewController {
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(0.6)), subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .groupPaging
-                
                 section.interGroupSpacing = -5
                 
                 section.contentInsets = .init(top: 10, leading: 0, bottom: 0, trailing: 0)
@@ -106,6 +111,8 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    //MARK: - Creating Header for Cells
     
     private func supplementaryHeaderItem() -> NSCollectionLayoutBoundarySupplementaryItem {
         .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
@@ -128,8 +135,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         switch sections[indexPath.section] {
             
         case .category:
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoryCollectionViewCell", for: indexPath) as! StoryCollectionViewCell
+                
             cell.setup(with: images[indexPath.row], title: labels[indexPath.row])
+            
 
             return cell
             
@@ -137,7 +147,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PortraitCollectionViewCell", for: indexPath) as! PortraitCollectionViewCell
             
-            DispatchQueue.main.asyncAfter(deadline: .now()+5){
+            DispatchQueue.main.asyncAfter(deadline: .now()+2){
                 cell.setup(item: (self.apiResponse?.home_store[indexPath.row])!)
             }
             
@@ -150,7 +160,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LandscapeCollectionViewCell", for: indexPath) as! LandscapeCollectionViewCell
             cell.likedItem.layer.cornerRadius = cell.likedItem.frame.size.height / 2
             cell.likedItem.backgroundColor = .white
-            DispatchQueue.main.asyncAfter(deadline: .now()+5) {
+            DispatchQueue.main.asyncAfter(deadline: .now()+3) {
                 cell.setup(item: (self.apiResponse?.best_seller[indexPath.row])!)
             }
             
@@ -160,22 +170,33 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        
+        
         switch sections[indexPath.section]{
+         
         case .category:
+            
+            if let cell = collectionView.cellForItem(at: indexPath) as? StoryCollectionViewCell{
+                cell.cellImageView.image = UIImage(named: highlightedImages[indexPath.row])
+                cell.showImage()
+            }
+            
             if indexPath.row == 2 {
                 collectionView.scrollToItem(at: IndexPath(row: 4, section: 0), at: .right, animated: true)
-                        }
+            }
         case .hotSales:
-            print(sections[indexPath.section].title)
+            self.performSegue(withIdentifier: "goToProductDetails", sender: self)
         case .bestSeller:
             self.performSegue(withIdentifier: "goToProductDetails", sender: self)
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destionation = segue.destination as! ProductViewController
-        
-    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? StoryCollectionViewCell{
+            cell.hideImage()
+            cell.cellImageView.image = UIImage(named: images[indexPath.row])
+            cell.showImage()
+        }
     }
     
     //MARK - Setting up the header for each section
@@ -192,6 +213,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         }
     }
 }
+//MARK: - Presenting the bottom Sheet
+
 
 extension ViewController: UIViewControllerTransitioningDelegate{
     

@@ -2,7 +2,7 @@
 //  ProductDetails.swift
 //  MultiSectionCompositionalLayout
 //
-//  Created by TTGMOTSF on 12/12/2022.
+//  Created by TTGMOTSF on 5/12/2022.
 //
 
 import Foundation

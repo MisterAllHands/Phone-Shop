@@ -24,7 +24,6 @@
 		ED0C6944294D5703000958A9 /* DataPersistantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0C6943294D5703000958A9 /* DataPersistantManager.swift */; };
 		ED0C694A294DD9D2000958A9 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED0C6948294DD9D2000958A9 /* DataModel.xcdatamodeld */; };
 		ED1D1CD9294166F5000093EE /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D1CD8294166F5000093EE /* CustomTabBarController.swift */; };
-		ED1D1D0529425643000093EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D1D0429425643000093EE /* Extensions.swift */; };
 		ED1D1D0929428498000093EE /* SheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D1D0729428498000093EE /* SheetViewController.swift */; };
 		ED1D1D0A29428498000093EE /* SheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED1D1D0829428498000093EE /* SheetViewController.xib */; };
 		ED2EFDDD294BB72C0058A379 /* CustomItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2EFDDB294BB72C0058A379 /* CustomItemsCell.swift */; };
@@ -62,7 +61,6 @@
 		ED0C6943294D5703000958A9 /* DataPersistantManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistantManager.swift; sourceTree = "<group>"; };
 		ED0C6949294DD9D2000958A9 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		ED1D1CD8294166F5000093EE /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
-		ED1D1D0429425643000093EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		ED1D1D0729428498000093EE /* SheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewController.swift; sourceTree = "<group>"; };
 		ED1D1D0829428498000093EE /* SheetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SheetViewController.xib; sourceTree = "<group>"; };
 		ED2EFDDB294BB72C0058A379 /* CustomItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomItemsCell.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 				ED74E71E293FF1CE003FF35A /* Views */,
 				ED74E720293FF21D003FF35A /* ViewModels */,
 				ED74E71D293FF1B7003FF35A /* Services */,
-				ED74E726293FF328003FF35A /* Resources */,
 				E52E5EA1283121CA00ACAAA3 /* Assets.xcassets */,
 				E52E5EA6283121CA00ACAAA3 /* Info.plist */,
 			);
@@ -249,14 +246,6 @@
 				ED2EFDDC294BB72C0058A379 /* CustomItemsCell.xib */,
 			);
 			path = MyCart;
-			sourceTree = "<group>";
-		};
-		ED74E726293FF328003FF35A /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				ED1D1D0429425643000093EE /* Extensions.swift */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		FF7A1C150D0BF95E0E8E6CEA /* Frameworks */ = {
@@ -386,7 +375,6 @@
 			files = (
 				E52E5EAD2831359C00ACAAA3 /* Items.swift in Sources */,
 				E52E5E9D283121C000ACAAA3 /* ViewController.swift in Sources */,
-				ED1D1D0529425643000093EE /* Extensions.swift in Sources */,
 				ED2EFDDD294BB72C0058A379 /* CustomItemsCell.swift in Sources */,
 				ED9D907D29454A4A00FF04B0 /* GloadViewModel.swift in Sources */,
 				ED9D906F294407F200FF04B0 /* ProductViewController.swift in Sources */,

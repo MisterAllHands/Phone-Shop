@@ -12,8 +12,8 @@ import SDWebImage
 final class LandscapeCollectionViewCell: UICollectionViewCell {
     
     var models: BestSellerItem?
-   
-    var savedModels: Baskets?
+    
+    var theItemToDelete: Baskets?
     
     @IBOutlet weak var cellImageView: UIImageView!
     @IBOutlet weak var mainPrice: UILabel!
@@ -53,54 +53,50 @@ final class LandscapeCollectionViewCell: UICollectionViewCell {
         
     }
     
-        @IBAction func addedTofavorites(_ sender: UIButton) {
-    
-            isLiked = !isLiked
-    
-            if isLiked{
-                likedItem.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-   
-                
-                if let safeModel = models {
-                    DatapersistantManager.shared.addItemToFavorites(model: safeModel ) { result in
-                        switch result {
-                        case .success():
-                            print("Downloaded")
-                        case .failure(let failure):
-                                print("Error")
-                                print(failure)
-                        }
-                    }
-                }
-
-                DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
-                    self.performTask(send: "addValue")
-                }
-            }
-            else{
-                
-                likedItem.setImage(UIImage(systemName: "heart"), for: .normal)
-                
-                DatapersistantManager.shared.deleteDataFromDatabase(model: savedModels!) { result in
-                    switch result{
-                    case .success():
-                        print("Success")
-                    case .failure():
-                        print("Error")
-                    }
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
-                    self.performTask(send: "removeValue")
-                }
-            }
-        }
+    @IBAction func addedTofavorites(_ sender: UIButton) {
         
-        func performTask(send: String) {
+        isLiked = !isLiked
+        
+        if isLiked{
+            likedItem.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             
-            let nc = NotificationCenter.default
-            nc.post(name: Notification.Name(send), object: nil)
             
+            if let safeModel = models {
+                DatapersistantManager.shared.addItemToFavorites(model: safeModel )
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
+                self.performTask(send: "addValue")
+            }
+        }else{
+            
+            likedItem.setImage(UIImage(systemName: "heart"), for: .normal)
+            
+            if let safeModel = models {
+                
+                DatapersistantManager.shared.fetchingDataToDataBase { result in
+                    switch result {
+                    case .success(let baskets):
+                        if let itemToX = baskets.last {
+                            self.theItemToDelete = itemToX
+                        }
+                    case .failure(let failure):
+                        print(failure)
+                    }
+                }
+                DatapersistantManager.shared.deleteDataFromDatabase(model: theItemToDelete!)
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
+                self.performTask(send: "removeValue")
+            }
         }
+    }
     
+    func performTask(send: String) {
+        
+        let nc = NotificationCenter.default
+        nc.post(name: Notification.Name(send), object: nil)
+        
+    }
 }

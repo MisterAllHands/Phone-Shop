@@ -9,6 +9,7 @@ import UIKit
 import SwiftyStepper
 
 
+
 class CartViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
@@ -18,7 +19,7 @@ class CartViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var total: UILabel!
     
     
-    var models: [Baskets] = []
+    var basketModels: [Baskets] = []
     var response: CartAddedItems?
          
     override func viewDidLoad() {
@@ -26,16 +27,6 @@ class CartViewController: UIViewController, UIGestureRecognizerDelegate {
         customNavbarItems()
         myTableView.delegate = self
         myTableView.dataSource = self
-        
-//        APICaller.shared.getCartItems { result in
-//            switch result {
-//            case .success(let data):
-//                self.models = data.basket
-//            case .failure(let failure):
-//                print(failure)
-//            }
-//        }
-        
         fetchLocalStorageForFavorites()
         
         navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -48,8 +39,9 @@ class CartViewController: UIViewController, UIGestureRecognizerDelegate {
         //MARK - Sending notification one the button gets tapped
         
         let nc3 = NotificationCenter.default
-        nc3.addObserver(self, selector: #selector(tingTaped),
+        nc3.addObserver(self, selector: #selector(tingTaped(_:)),
                         name: Notification.Name( "updateView"), object: nil)
+        
         
         CustomizedView.setViewConstrainsts(with: containerView)
         checkOut.layer.cornerRadius = checkOut.frame.height / 4
@@ -59,13 +51,26 @@ class CartViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
     }
+    //Receiving Updates on item price and updating total price
+    
+    
+    @objc func tingTaped(_ notification: NSNotification){
+        let thePrice = notification.userInfo?["itemPrice"] as? String
+        
+        if let totalPrice = thePrice{
+            
+            self.total.text = "$\(totalPrice) USD"
+        }
+    }
+    
+    //MARK - Showing saved items
     
     private func fetchLocalStorageForFavorites(){
         
         DatapersistantManager.shared.fetchingDataToDataBase {[weak self] result in
             switch result{
             case .success(let baskets):
-                self?.models = baskets
+                self?.basketModels = baskets
                 
                 DispatchQueue.main.async {
                     self?.myTableView.reloadData()
@@ -75,6 +80,8 @@ class CartViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
     }
+    
+    //MARK - Creating left & right nav bar buttons
     
     func customNavbarItems(){
         
@@ -94,6 +101,8 @@ class CartViewController: UIViewController, UIGestureRecognizerDelegate {
         self.navigationItem.leftBarButtonItem = leftBarButton
     }
     
+    //Action for right bar button
+    
     @objc private func fbButtonPressed() {
         
         let alert = UIAlertController(title: "Error", message: "Sorry! We couldn't detect your location. Please try again later!", preferredStyle: .alert)
@@ -103,63 +112,45 @@ class CartViewController: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
+    //Action for left bar button
+    
     @objc private func popToPrevious() {
         self.tabBarController?.tabBar.isHidden = false
         navigationController?.popViewController(animated: true)
-
     }
-
 }
 
 //MARK: - TableView Delegate & Datasource Methods
+
+
 extension CartViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomItemsCell", for: indexPath) as! CustomItemsCell
-        cell.setUpWith(item: self.models[indexPath.row])
-        cell.deleteItem.addTarget(self, action: #selector(deletesItem), for: .touchUpInside)
+        cell.setUpWith(item: self.basketModels[indexPath.row])
         
         return cell
-    }
-
-    
-    
-    @objc func tingTaped(){
-        
-       print("ting")
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return models.count
+        return basketModels.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
     
-    @objc func deletesItem(){
-
-        let alert = UIAlertController(title: "Are you sure you want to delete the item from your Cart ?", message: "", preferredStyle: .alert)
-        let deleteAction = UIAlertAction(title: "Yes", style: .destructive, handler: deleteItemFromCart)
-        let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
-        alert.addAction(deleteAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true)
-    }
-    
-    func deleteItemFromCart(action: UIAlertAction){
-        
-//        DatapersistantManager.shared.deleteDataFromDatabase(model: models[indexPath.row]) { result in
-//            switch result{
-//            case .success():
-//                print("Successfully deleted Item")
-//            case .failure():
-//                print("Error while deleting the item at selected row ")
-//            }
-//        }
-        
-        print("deleted")
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle{
+        case .delete:
+            tableView.beginUpdates()
+            DatapersistantManager.shared.deleteDataFromDatabase(model: self.basketModels[indexPath.row])
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            basketModels.remove(at: indexPath.row)
+            tableView.endUpdates()
+        default:
+            break
+        }
     }
 }

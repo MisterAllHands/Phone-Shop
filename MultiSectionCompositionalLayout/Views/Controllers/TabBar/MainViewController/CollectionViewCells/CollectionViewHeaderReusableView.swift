@@ -1,9 +1,9 @@
-//
-//  CollectionViewHeaderReusableView.swift
+
+//  CollectionViewHeaderReusableView
 //  MultiSectionCompositionalLayout
-//
+
 //  Created by TTGMOTSF on 9/12/22.
-//
+
 
 import UIKit
 

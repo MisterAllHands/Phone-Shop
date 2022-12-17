@@ -2,7 +2,7 @@
 //  ListItem.swift
 //  MultiSectionCompositionalLayout
 //
-//  Created by Emmanuel Okwara on 15.05.22.
+//  Created by TTGMOTSF on 4/12/22
 //
 
 import Foundation
@@ -29,13 +29,6 @@ struct ProductItem {
     let title: String
 }
 
-struct CartItem {
-    
-    let images: String
-    let title: String
-    let price: Int
-    
-}
 
 
 

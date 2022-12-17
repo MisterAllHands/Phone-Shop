@@ -18,13 +18,14 @@ class DatapersistantManager{
     enum DataBaseError: Error{
         case failedSaving
         case failedFetching
+        case failedDeletingData
     }
     
     
     
     //MARK: - Saving data
     
-    func addItemToFavorites(model: BestSellerItem, completion: @escaping(Result<Void, Error>) -> Void){
+    func addItemToFavorites(model: BestSellerItem){
         
         let basket = Baskets(context: context)
         
@@ -35,9 +36,9 @@ class DatapersistantManager{
         
         do{
             try context.save()
-            completion(.success(()))
+            
         }catch{
-            completion(.failure(DataBaseError.failedSaving))
+            print("Error while adding the item \(DataBaseError.failedSaving)")
         }
     }
     
@@ -60,14 +61,14 @@ class DatapersistantManager{
     
     //MARK: - Deleting Data
     
-    func deleteDataFromDatabase(model: Baskets, completion: @escaping(Result<Void, Error>) -> Void){
+    func deleteDataFromDatabase(model: Baskets){
         
         context.delete(model)
         
         do{
             try context.save()
         }catch{
-            print(error)
+            print(DataBaseError.failedDeletingData)
         }
     }
 }

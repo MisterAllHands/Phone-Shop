@@ -29,7 +29,7 @@ class SheetViewController: UIViewController {
 
     
     let brandArray = ["Samsung","Xiaomi", "Iphone"]
-    let priceArray = ["250-400","$500-$1000", "$1000-1500"]
+    let priceArray = ["$250-400","$500-$1000", "$1000-1500"]
     let sizeArray = ["4.5 to 5.5 inches", "6.0 to 6.5 inches"]
     
     let dropDown = DropDown()

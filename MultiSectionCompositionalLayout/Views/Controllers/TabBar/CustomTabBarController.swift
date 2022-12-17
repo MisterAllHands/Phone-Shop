@@ -29,30 +29,12 @@ class TabBarController: UITabBarController {
         nc2.addObserver(self, selector: #selector(removeBadgeValue),
                         name: Notification.Name( "removeValue"), object: nil)
         
-        
-//        APICaller.shared.getCartItems { [self] result in
-//            switch result {
-//            case .success(let data):
-//                self.baskets = data.basket
+
                 DispatchQueue.main.async {[self] in
                     initialValue = baskets.count
-//                    initialValue = baskets.count
                     tabBar.items?[1].badgeValue = "\(initialValue)"
                 }
-//            case .failure(let failure):
-//                print(failure)
-//            }
-//        }
-//        if baskets.count > 0 {
-//            let basketValue = initialValue + baskets.count
-//            DispatchQueue.main.async {[self] in
-//
-//                tabBar.items?[1].badgeValue = "\(initialValue)"
-//            }
-//        }else{
-//            tabBar.items?[1].badgeValue = "\(0)"
-//        }
-        tabBar.items?[1].badgeValue = "\(initialValue)"
+
         ChangeRadiusOfTabbar()
     }
     
