@@ -28,13 +28,15 @@ struct ProductItem {
     let ssd: String
     let title: String
 }
+
 struct CartItem {
     
-    let total: Int
     let images: String
     let title: String
-    let delivery: String
+    let price: Int
     
 }
+
+
 
 

@@ -2,21 +2,60 @@ import Foundation
 import UIKit
 import ChameleonFramework
 
+protocol badgeQuantityUpdate {
+    func removeItem()
+    func add()
+}
+
 
 class TabBarController: UITabBarController {
     
     var customTabBarView = UIView(frame: .zero)
         
     // MARK: View lifecycle
+    var baskets: [Basket] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ChangeRadiusOfTabbar()
         
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(addBadgeValue),
+                       name: Notification.Name("addValue"), object: nil)
+        
+        let nc2 = NotificationCenter.default
+        nc2.addObserver(self, selector: #selector(removeBadgeValue),
+                        name: Notification.Name( "removeValue"), object: nil)
+        
+        
+        APICaller.shared.getCartItems { [self] result in
+            switch result {
+            case .success(let data):
+                self.baskets = data.basket
+                DispatchQueue.main.async {[self] in
+                    tabBar.items?[1].badgeValue = "\(baskets.count)"
+                }
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+        tabBar.items?[1].badgeValue = "\(baskets.count)"
+        ChangeRadiusOfTabbar()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+    }
+        
+    @objc func addBadgeValue() {
+            DispatchQueue.main.async {
+                self.tabBar.items?[1].badgeValue = "\(self.baskets.count + 1)"
+            }
+    }
+    
+    @objc func removeBadgeValue() {
+        DispatchQueue.main.async {
+            self.tabBar.items?[1].badgeValue = "\(self.baskets.count - 1)"
+        }
     }
     
     func ChangeRadiusOfTabbar(){

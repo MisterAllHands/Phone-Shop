@@ -9,13 +9,13 @@ import Foundation
 
 struct CartAddedItems: Codable{
     
-    let basket: [Baskets]
+    let basket: [Basket]
     let delivery: String
     let id: String
     let total: Int
 }
 
-struct Baskets: Codable{
+struct Basket: Codable {
     
     let id: Int
     let images: String

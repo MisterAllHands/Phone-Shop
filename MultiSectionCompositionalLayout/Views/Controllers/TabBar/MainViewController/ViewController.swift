@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  MultiSectionCompositionalLayout
 //
-//  Created by Emmanuel Okwara on 15.05.22.
+//  Created by TTGMOTSF.
 //
 
 import UIKit
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         collectionView.collectionViewLayout = createLayout()
         fetchMainScreen()
     }
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
         presentBottomSheet()
         
     }
-
+    
     private func createLayout() -> UICollectionViewCompositionalLayout {
         UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
             guard let self = self else { return nil }
@@ -148,6 +148,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             
         case .bestSeller:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LandscapeCollectionViewCell", for: indexPath) as! LandscapeCollectionViewCell
+            cell.likedItem.layer.cornerRadius = cell.likedItem.frame.size.height / 2
+            cell.likedItem.backgroundColor = .white
             DispatchQueue.main.asyncAfter(deadline: .now()+5) {
                 cell.setup(item: (self.apiResponse?.best_seller[indexPath.row])!)
             }
